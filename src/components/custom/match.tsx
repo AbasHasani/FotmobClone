@@ -27,7 +27,7 @@ const Match = ({ status, period, teamA, teamB, score, id, startDate }: any) => {
     >
       <div className="absolute top-1/2 -translate-y-1/2 left-3 text-green-400">
         {status === "LIVE" ? (
-          <span className="live-minute">{period?.minute}{period?.extra}' </span>
+          <span className="live-minute">{period?.minute}{period?.extra}&apos; </span>
         ) : status === "RESULT" ? (
           "FT"
         ) : (

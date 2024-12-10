@@ -1,8 +1,13 @@
 import { baseGoalImageUrl, fetchGraphql } from "@/lib/utils";
 import { gql } from "@apollo/client";
+import { Abril_Fatface } from "next/font/google";
 import Image from "next/image";
 import React from "react";
-import { AbrilFatface } from "../layout";
+const AbrilFatface = Abril_Fatface({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-abril",
+});
 
 const GET_TEAM_STANDIGS = gql`
   query Team($id: String!) {
@@ -69,7 +74,12 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
               </thead>
               <tbody>
                 {standing.table.rankings.map((ranking: any) => (
-                  <tr key={ranking.team.id} className={`odd:bg-gray-700/50 ${ranking.team.id == id ? "text-green-300" : ""}`}>
+                  <tr
+                    key={ranking.team.id}
+                    className={`odd:bg-gray-700/50 ${
+                      ranking.team.id == id ? "text-green-300" : ""
+                    }`}
+                  >
                     <td>
                       <h2 className="p-2">{ranking.position}</h2>
                     </td>

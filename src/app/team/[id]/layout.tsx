@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { ReactNode } from "react";
 
-export const AbrilFatface = Abril_Fatface({
+const AbrilFatface = Abril_Fatface({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-abril",

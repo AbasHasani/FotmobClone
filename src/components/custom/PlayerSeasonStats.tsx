@@ -5,13 +5,13 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { Combobox } from "./Combobox";
 
-const PlayerSeasonStats = ({ stats }: { stats: PlayerStats[] }) => {
+const PlayerSeasonStats = ({ stats }: any) => {
   const [competetion, setCompetition] = useState({
     name: stats[0].competition?.name || "",
     season: stats[0].season?.name || "",
   });
   const stat = stats.filter(
-    (s) =>
+    (s:any) =>
       s.competition?.name == competetion.name &&
       s.season?.name == competetion.season
   )[0];
@@ -19,7 +19,7 @@ const PlayerSeasonStats = ({ stats }: { stats: PlayerStats[] }) => {
     <div>
       <div className="my-5">
         <Combobox
-          items={stats.map((s) => ({
+          items={stats.map((s:any) => ({
             label: s.competition?.name + " " + s.season?.name,
             value: s.competition?.name + "-" + s.season?.name,
           }))}
@@ -43,7 +43,7 @@ const PlayerSeasonStats = ({ stats }: { stats: PlayerStats[] }) => {
           </thead>
           <tbody>
             {Object.keys(stat?.stats || {}).map((key) => (
-              <tr className="odd:bg-slate-800/20">
+              <tr className="odd:bg-slate-800/20" key={key}>
                 <td className="p-5">{key}</td>
                 {/* @ts-ignore */}
                 <td className="pl-6">{stat?.stats?.[key]}</td>

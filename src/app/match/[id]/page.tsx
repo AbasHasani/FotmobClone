@@ -250,7 +250,7 @@ const Page: FC<props> = async ({ params }) => {
             {/* @ts-ignore */}
             {data.status === "LIVE" ? (
               // @ts-ignore
-              <span className="live-minute">{period}'</span>
+              <span className="live-minute">{period}&apos;</span>
             ) : // @ts-ignore
             data.status === "RESULT" ? (
               "FT"
@@ -289,7 +289,7 @@ const Page: FC<props> = async ({ params }) => {
                   key={event.period.minute + event.type}
                   className="w-8 h-8 bg-green-900/40 rounded-full grid place-items-center mr-2"
                 >
-                  {event.period.minute}'
+                  {event.period.minute}&apos;
                 </p>
               ))}
               <p>{player.player.name}</p>
@@ -307,7 +307,7 @@ const Page: FC<props> = async ({ params }) => {
                   key={event.period.minute + event.type}
                   className="w-8 h-8 bg-green-900/40 rounded-full grid place-items-center mr-2"
                 >
-                  {event.period.minute}'
+                  {event.period.minute}&apos;
                 </p>
               ))}
               <p>{player.player.name}</p>

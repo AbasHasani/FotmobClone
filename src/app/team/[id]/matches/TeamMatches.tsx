@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 const TeamMatches = ({ data }: any) => {
   const lastMatch = useRef<HTMLDivElement>(null);
-  let lastMatchId = data.data.teamMatches.filter(
+  const lastMatchId = data.data.teamMatches.filter(
     (s: any) => s.status === "FIXTURE"
   )[0].id;
   return (

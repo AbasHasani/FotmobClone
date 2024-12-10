@@ -3,8 +3,13 @@ import { gql } from "@apollo/client";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { AbrilFatface } from "../layout";
+const AbrilFatface = Abril_Fatface({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-abril",
+});
 import { HandHelping, LoaderPinwheel, PersonStanding } from "lucide-react";
+import { Abril_Fatface } from "next/font/google";
 
 const GET_TEAM_SQUAD = gql`
   query Team($id: String!) {

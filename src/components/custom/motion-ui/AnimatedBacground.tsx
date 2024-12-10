@@ -1,5 +1,9 @@
 "use client";
-import { AbrilFatface } from "@/app/team/[id]/layout";
+const AbrilFatface = Abril_Fatface({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-abril",
+});
 import AnimatedBackground from "@/components/ui/animated-background";
 import {
   CalendarFold,
@@ -11,6 +15,7 @@ import {
   Settings,
   User,
 } from "lucide-react";
+import { Abril_Fatface } from "next/font/google";
 import React from "react";
 
 const AnimatedBacground = ({

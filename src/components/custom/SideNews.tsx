@@ -1,10 +1,15 @@
-import { AbrilFatface } from "@/app/team/[id]/layout";
 import { News as NewsType } from "@/generated/graphql";
 import { requestGraphql, truncateAfterSpace } from "@/lib/utils";
 import { gql } from "graphql-request";
+import { Abril_Fatface } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+const AbrilFatface = Abril_Fatface({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-abril",
+});
 const GET_NEWS = gql`
   query GetMatch {
     news {

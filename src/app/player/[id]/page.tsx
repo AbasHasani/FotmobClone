@@ -1,4 +1,3 @@
-import { AbrilFatface } from "@/app/team/[id]/layout";
 import { baseGoalImageUrl, fetchGraphql } from "@/lib/utils";
 import { gql } from "@apollo/client";
 import Image from "next/image";
@@ -6,6 +5,12 @@ import Link from "next/link";
 import React from "react";
 import PlayerNews from "./playerNews";
 import PlayerStats from "@/components/custom/PlayerStats";
+import { Abril_Fatface } from "next/font/google";
+const AbrilFatface = Abril_Fatface({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-abril",
+});
 
 const GET_PLAYER = gql`
   query GET_PLAYER($id: String!) {
