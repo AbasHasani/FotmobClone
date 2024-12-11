@@ -40,7 +40,7 @@ const Page: FC<props> = async ({ params }) => {
   const variables = { id };
   const res: any = await requestGraphql(query, variables);
   if (!res) return <p>No Data!</p>;
-  const data = (await res.json()).data?.teamNews?.cards as any;
+  const data = res?.teamNews?.cards as any;
   return (
     <div>
       <NewsSection cards={data} />

@@ -202,7 +202,7 @@ const Page: FC<props> = async ({ params }) => {
   const variables = { id };
   const res: any = await requestGraphql(query, variables);
   if (!res) return "Error";
-  const data = res.data.match;
+  const data = res.match;
 
   return (
     <div className="container mx-auto">
