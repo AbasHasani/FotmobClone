@@ -92,3 +92,24 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.pitch {
+  background: repeating-radial-gradient(
+    circle,
+    #00791d,
+    /* Start with red */ #00791d 40px,
+    /* Red ends at 20px */ #004e12 40px,
+    /* Blue starts at 20px */ #004e12 80px /* Blue ends at 40px */
+  );
+}
+@media screen and (min-width: 768px) {
+  .pitch {
+    background: repeating-radial-gradient(
+    circle,
+    #00791d,
+     #00791d 70px,
+     #004e12 70px,
+     #004e12 140px  
+  );
+  }
+}

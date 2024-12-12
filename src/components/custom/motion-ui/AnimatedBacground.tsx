@@ -4,20 +4,10 @@ const AbrilFatface = Abril_Fatface({
   weight: "400",
   variable: "--font-abril",
 });
+import { useCalender } from "@/components/providers/calender";
 import AnimatedBackground from "@/components/ui/animated-background";
-import {
-  ArrowLeft,
-  ArrowLeftFromLine,
-  ArrowRight,
-  CalendarFold,
-  CheckCheck,
-  Columns3,
-  Home,
-  PhoneCall,
-  Radio,
-  Settings,
-  User,
-} from "lucide-react";
+import { getAdjacentDates } from "@/lib/utils";
+import { CalendarFold, CheckCheck, Columns3, Radio } from "lucide-react";
 import { Abril_Fatface } from "next/font/google";
 import React from "react";
 import { IconLeft, IconRight } from "react-day-picker";
@@ -27,6 +17,7 @@ const AnimatedBacground = ({
 }: {
   changeFilter: (val: string) => void;
 }) => {
+  const date = useCalender();
   const TABS = [
     {
       label: "Live",
@@ -50,6 +41,18 @@ const AnimatedBacground = ({
       icon: <Columns3 className="h-5 w-5" />,
     },
   ];
+
+  const handleDateChange = (tomorrow: boolean) => {
+    const dates: any = getAdjacentDates(date.date);
+    let newDate: any;
+    if (tomorrow) {
+      newDate = dates.tomorrow;
+    } else {
+      newDate = dates.yesterday;
+    }
+    date.changeDate(newDate);
+    console.log(newDate);
+  };
   return (
     <div className="flex flex-col items-center my-3">
       <h1 className={`font-bold text-3xl ${AbrilFatface.className}`}>
@@ -75,9 +78,13 @@ const AnimatedBacground = ({
               key={tab.label}
               data-id={tab.value}
               type="button"
-              className="inline-flex text-zinc-500 items-center transition-colors duration-100 focus-visible:outline-2 data-[checked=true]:text-zinc-950"
+              className={`md:inline-flex text-zinc-500 items-center transition-colors duration-100 focus-visible:outline-2 data-[checked=true]:text-zinc-950 ${
+                tab.value == "RESULT" || tab.value == "FIXTURE"
+                  ? "hidden"
+                  : "inline-flex"
+              }`}
             >
-              <span className="flex gap-2 items-center md:p-3 p-1 px-2 justify-center">
+              <span className="flex gap-2 items-center p-1 px-3 justify-center">
                 {tab.icon}
                 {tab.label}
               </span>
@@ -86,9 +93,13 @@ const AnimatedBacground = ({
         </AnimatedBackground>
       </div>
       <div className="flex justify-between items-center md:hidden w-full my-3">
-        <IconLeft />
-        <p>date</p>
-        <IconRight />
+        <button onClick={() => handleDateChange(false)}>
+          <IconLeft />
+        </button>
+        <p>{date.date.replaceAll("-", "/")}</p>
+        <button onClick={() => handleDateChange(true)}>
+          <IconRight />
+        </button>
       </div>
     </div>
   );

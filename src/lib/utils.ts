@@ -56,3 +56,49 @@ export const requestGraphql = async (
   });
   return data;
 };
+
+export function analyzeNumbers(a: number, b: number) {
+  if (a + b === 100) {
+    return { firstNumber: a, secondNumber: b };
+  } else {
+    const total = a + b;
+    const percentA = (a / total) * 100;
+    const percentB = (b / total) * 100;
+
+    return {
+      firstNumber: parseFloat(percentA.toFixed(2)),
+      secondNumber: parseFloat(percentB.toFixed(2)),
+    };
+  }
+}
+
+export function getAdjacentDates(dateStr: string) {
+  // Parse the date string (assuming format YYYY-MM-DD)
+  const [year, month, day] = dateStr.split("-").map((num) => parseInt(num));
+
+  // Create a Date object (subtract 1 from month since months are 0-based in JS)
+  const date = new Date(year, month - 1, day);
+
+  // Create yesterday by subtracting 1 day (86400000 milliseconds)
+  const yesterday = new Date(date);
+  yesterday.setDate(date.getDate() - 1);
+
+  // Create tomorrow by adding 1 day
+  const tomorrow = new Date(date);
+  tomorrow.setDate(date.getDate() + 1);
+
+  // Format dates back to strings
+  const formatDate = (date: any) => {
+    const y = date.getFullYear();
+    // Add leading zeros for month and day
+    const m = String(date.getMonth() + 1).padStart(2, "0");
+    const d = String(date.getDate()).padStart(2, "0");
+    return `${y}-${m}-${d}`;
+  };
+
+  return {
+    yesterday: yesterday,
+    date: dateStr,
+    tomorrow: tomorrow,
+  };
+}

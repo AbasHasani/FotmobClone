@@ -1,4 +1,4 @@
-import { Goal as Ball } from "lucide-react";
+import { LoaderPinwheel as Ball } from "lucide-react";
 import React from "react";
 
 const Goal = ({ scorer, assist, homeSide, penalty }: any) => {

@@ -1,9 +1,3 @@
-import Events from "@/components/custom/events";
-import Card from "@/components/custom/events/Card";
-import Goal from "@/components/custom/events/Goal";
-import Substitution from "@/components/custom/events/Substitution";
-import Lineup from "@/components/custom/Lineup";
-import { MatchDetails, Match } from "@/generated/graphql";
 import {
   baseGoalImageUrl,
   convertUTCToLocalTime,
@@ -14,6 +8,7 @@ import { print } from "graphql";
 import Image from "next/image";
 import Link from "next/link";
 import React, { FC } from "react";
+import Wrapper from "./wrapper";
 
 interface props {
   params: Promise<{
@@ -25,7 +20,18 @@ const GET_MATCH = gql`
   query Query($id: String!) {
     match(id: $id) {
       status
-      period
+      competition {
+        area {
+          name
+        }
+        name
+        id
+      }
+      period {
+        minute
+        extra
+        type
+      }
       startDate
       score {
         teamA
@@ -105,6 +111,27 @@ const GET_MATCH = gql`
             name
             id
           }
+          substitutes {
+            person {
+              name
+              id
+              image {
+                url
+              }
+            }
+            shirtNumber
+            events {
+              in {
+                name
+              }
+              out {
+                name
+              }
+              scorer {
+                name
+              }
+            }
+          }
           lineup {
             shirtNumber
             pitchPosition {
@@ -151,6 +178,27 @@ const GET_MATCH = gql`
             name
             id
           }
+          substitutes {
+            person {
+              name
+              id
+              image {
+                url
+              }
+            }
+            shirtNumber
+            events {
+              in {
+                name
+              }
+              out {
+                name
+              }
+              scorer {
+                name
+              }
+            }
+          }
           lineup {
             shirtNumber
             pitchPosition {
@@ -190,6 +238,99 @@ const GET_MATCH = gql`
               side
             }
           }
+        }
+      }
+      form {
+        allTeamA {
+          matches {
+            wdl
+            match {
+              teamA {
+                name
+                id
+                image {
+                  url
+                }
+              }
+              teamB {
+                name
+                id
+                image {
+                  url
+                }
+              }
+              score {
+                teamA
+                teamB
+              }
+            }
+          }
+        }
+        allTeamB {
+          matches {
+            wdl
+            match {
+              teamA {
+                name
+                id
+                image {
+                  url
+                }
+              }
+              teamB {
+                name
+                id
+                image {
+                  url
+                }
+              }
+              score {
+                teamA
+                teamB
+              }
+            }
+          }
+        }
+      }
+      referee
+      round {
+        display
+        id
+        name
+      }
+      venue {
+        name
+      }
+      stats {
+        attacking {
+          type
+          teamA
+          teamB
+        }
+        defence {
+          type
+          teamA
+          teamB
+        }
+        discipline {
+          type
+          teamA
+          teamB
+        }
+        duels {
+          type
+          teamA
+          teamB
+        }
+        passing {
+          type
+          teamA
+          teamB
+        }
+        summary {
+          type
+          teamA
+          teamB
         }
       }
     }
@@ -250,7 +391,7 @@ const Page: FC<props> = async ({ params }) => {
             {/* @ts-ignore */}
             {data.status === "LIVE" ? (
               // @ts-ignore
-              <span className="live-minute">{period}&apos;</span>
+              <span className="live-minute">{data?.period?.minute}&apos;</span>
             ) : // @ts-ignore
             data.status === "RESULT" ? (
               "FT"
@@ -315,8 +456,7 @@ const Page: FC<props> = async ({ params }) => {
           ))}
         </div>
       </div>
-      <Events data={data} />
-      <Lineup data={data} />
+      <Wrapper data={data} />
       <pre>{JSON.stringify(data, null, 2)}</pre>
     </div>
   );

@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Providers } from "../components/providers/apollo-client";
+import Header from "@/components/custom/Header";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -30,8 +31,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased ${poppins.className} dark`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased ${poppins.className} dark pt-[4rem]`}
       >
+        <Header />
         <Providers>{children}</Providers>
       </body>
     </html>

@@ -10,8 +10,8 @@ const Card = ({ player, homeSide, red }: any) => {
     >
       <IdCard />
       <div>
-        <p className="font-bold text-lg text-green-300">{player.name}</p>
-        <p className="font-light text-sm text-green-600/40">
+        <p className="font-bold text-lg">{player.name}</p>
+        <p className="font-light text-sm text-green-400/40">
           {red ? "Red" : "Yellow"}
         </p>
       </div>
