@@ -67,7 +67,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   );
   return (
     <div className="">
-      <ul className="flex gap-6">
+      <ul className="flex gap-6 text-xs md:text-base">
         <li className="flex gap-2">
           <HandHelping />: Assist
         </li>
@@ -99,11 +99,29 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
       <div className="mt-3">
         {players.map(([key, value]: any) => (
           <div key={key}>
-            <h1
-              className={`capitalize m-3 font-bold text-xl ${AbrilFatface.className}`}
-            >
-              {key}
-            </h1>
+            <div className="grid grid-cols-1 md:grid-cols-2">
+              <div className="flex items-center gap-2 p-3 justify-between">
+                <h1
+                  className={`capitalize m-3 font-bold text-xl ${AbrilFatface.className}`}
+                >
+                  {key}
+                </h1>
+                <div className="flex gap-4">
+                  <LoaderPinwheel className="w-5" />
+                  <HandHelping className="w-5" />
+                  <PersonStanding className="w-5" />
+                </div>
+              </div>
+              <div className="md:flex items-center gap-2 p-3 justify-between hidden">
+                <span />
+                <div className="flex gap-4">
+                  <LoaderPinwheel className="w-5" />
+                  <HandHelping className="w-5" />
+                  <PersonStanding className="w-5" />
+                </div>
+              </div>
+            </div>
+
             <div className="grid gird-cols-1 md:grid-cols-2 md:gap-1">
               {value.map((player: any) => (
                 <Link
@@ -129,17 +147,14 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
                     </div>
                     {player?.stats && (
                       <div className="flex gap-3">
-                        <span className="flex gap-2">
+                        <span className="flex gap-2 w-5">
                           {player?.stats?.goals}
-                          <LoaderPinwheel />
                         </span>
-                        <span className="flex gap-2">
+                        <span className="flex gap-2 w-5">
                           {player?.stats?.assists}
-                          <HandHelping />
                         </span>
-                        <span className="flex gap-2">
+                        <span className="flex gap-2 w-5">
                           {player?.stats?.appearances}
-                          <PersonStanding />
                         </span>
                       </div>
                     )}

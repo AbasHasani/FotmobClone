@@ -7,7 +7,7 @@ const CustomCalendar = () => {
   const [date, setDate] = useState<Date | undefined>(new Date());
   const { changeDate } = useCalender();
   return (
-    <div className="col-span-2 flex flex-col justify-start items-start">
+    <div className="hidden md:flex col-span-2 flex-col justify-start items-start">
       <Calendar
         mode="single"
         selected={date}

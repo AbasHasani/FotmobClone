@@ -25,7 +25,7 @@ const Match = ({ status, period, teamA, teamB, score, id, startDate }: any) => {
         gridTemplateColumns: "1fr auto 1fr",
       }}
     >
-      <div className="absolute top-1/2 -translate-y-1/2 left-3 text-green-400">
+      <div className="absolute top-1/2 -translate-y-1/2 left-3 text-green-400 text-sm">
         {status === "LIVE" ? (
           <span className="live-minute">{period?.minute}{period?.extra}&apos; </span>
         ) : status === "RESULT" ? (
@@ -35,7 +35,7 @@ const Match = ({ status, period, teamA, teamB, score, id, startDate }: any) => {
         )}
       </div>
       <div className="flex justify-end gap-3 items-center">
-        <p className="text-sm lg:text-base">
+        <p className="text-xs lg:text-base">
           {truncateAfterSpace(teamA?.name || "", 16)}
         </p>
         <Image
@@ -46,7 +46,7 @@ const Match = ({ status, period, teamA, teamB, score, id, startDate }: any) => {
           className="w-7 h-7"
         />
       </div>
-      <div className="text-center flex gap-3 mx-4">
+      <div className="text-center flex gap-1 md:gap-3 md:mx-4 mx-2">
         <p
           className={`${
             (score?.teamA || 0) > (score?.teamB || 0) ? "text-green-400" : ""
@@ -71,7 +71,7 @@ const Match = ({ status, period, teamA, teamB, score, id, startDate }: any) => {
           alt="away-icon"
           className="w-7 h-7"
         />
-        <p className="text-sm lg:text-base">
+        <p className="text-xs lg:text-base">
           {truncateAfterSpace(teamB?.name || "", 20)}
         </p>
       </div>

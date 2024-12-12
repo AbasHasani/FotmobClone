@@ -50,7 +50,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   if (!data) return <p>No Data!</p>;
   if (!data.data.teamStandings) return <p>{JSON.stringify(data)}</p>;
   return (
-    <div className="">
+    <div className="px-3">
       <div>
         {data.data.teamStandings.map((standing: any) => (
           <div key={standing.competition.id} className="mb-14">
@@ -65,9 +65,9 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
                   <th className="text-left">Pos</th>
                   <th className="text-left">Team</th>
                   <th className="text-left">Points</th>
-                  <th className="text-left">Win</th>
-                  <th className="text-left">Draw</th>
-                  <th className="text-left">Loss</th>
+                  <th className="text-left hidden md:block">Win</th>
+                  <th className="text-left hidden md:block">Draw</th>
+                  <th className="text-left hidden md:block">Loss</th>
                   <th className="text-left">+/-</th>
                   <th className="text-left">form</th>
                 </tr>
@@ -89,29 +89,29 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
                         alt=""
                         width={100}
                         height={200}
-                        className="w-14 h-14"
+                        className="md:w-14 md:h-14 w-7 h-7"
                         unoptimized
                       />
                       <h2 className="ml-3">{ranking.team.name}</h2>
                     </td>
                     <td>{ranking.points}</td>
-                    <td>{ranking.win}</td>
-                    <td>{ranking.draw}</td>
-                    <td>{ranking.lose}</td>
+                    <td className="hidden md:block">{ranking.win}</td>
+                    <td className="hidden md:block">{ranking.draw}</td>
+                    <td className="hidden md:block">{ranking.lose}</td>
                     <td>{ranking.goalsDifference}</td>
                     <td>
-                      <div className="flex gap-1">
+                      <div className="flex md:gap-1 text-xs md:text-base">
                         {ranking.form
                           .map(({ wdl }: { wdl: string }) => wdl[0])
                           .map((wdl: string, i: number) => (
                             <div
                               key={wdl + i + Math.random()}
-                              className={`w-5 h-5 grid place-content-center rounded-sm text-white ${
+                              className={`md:w-5 md:h-5 grid place-content-center rounded-sm text-white ${
                                 wdl == "W"
-                                  ? "bg-green-500"
+                                  ? "md:bg-green-500 text-green-500"
                                   : wdl == "D"
-                                  ? "bg-gray-500"
-                                  : "bg-red-500"
+                                  ? "md:bg-gray-500 text-gray-500"
+                                  : "md:bg-red-500 text-red-500"
                               }`}
                             >
                               {wdl}

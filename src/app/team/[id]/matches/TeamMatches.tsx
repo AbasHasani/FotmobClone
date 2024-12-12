@@ -15,7 +15,7 @@ const TeamMatches = ({ data }: any) => {
           lastMatch?.current?.scrollIntoView({ behavior: "smooth" });
           console.log(lastMatch?.current);
         }}
-        className="bg-green-100 hover:bg-green-200 my-2"
+        className="bg-green-950/40 text-white hover:bg-green-950/70 my-2"
       >
         Go to next Match
       </Button>

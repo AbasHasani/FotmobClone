@@ -36,20 +36,9 @@ const Lineup = ({ data }: any) => {
     formation: data.lineups[selectedTeam == 1 ? "teamA" : "teamB"].formation,
     players: data.lineups[selectedTeam == 1 ? "teamA" : "teamB"]?.lineup,
   });
-  const lineupContainer = useRef<HTMLDivElement>(null);
-  const [containerWidth, setContainerWidth] = useState(0);
-  const [containerHeight, setContainerHeight] = useState(0);
-  useEffect(() => {
-    if (lineupContainer) {
-      const Width = lineupContainer.current?.offsetWidth || 0;
-      const Height = lineupContainer.current?.offsetHeight || 0;
-      setContainerWidth(Width);
-      setContainerHeight(Height);
-    }
-  }, []);
   return (
     <div className="border m-5 rounded-md overflow-hidden">
-      {!data.confirmed && <h1 className="font-bold text-xl p-3 text-center">This is probable lineup!</h1>}
+      {!data.lineups.confirmed && <h1 className="font-bold text-xl p-3 text-center">This is probable lineup!</h1>}
       <ul className="flex w-full">
         <li
           className={`p-2 flex-1 text-center cursor-pointer rounded-br-xl md:pointer-events-none transition-all ${

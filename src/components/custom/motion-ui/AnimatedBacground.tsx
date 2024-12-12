@@ -6,6 +6,9 @@ const AbrilFatface = Abril_Fatface({
 });
 import AnimatedBackground from "@/components/ui/animated-background";
 import {
+  ArrowLeft,
+  ArrowLeftFromLine,
+  ArrowRight,
   CalendarFold,
   CheckCheck,
   Columns3,
@@ -17,6 +20,7 @@ import {
 } from "lucide-react";
 import { Abril_Fatface } from "next/font/google";
 import React from "react";
+import { IconLeft, IconRight } from "react-day-picker";
 
 const AnimatedBacground = ({
   changeFilter,
@@ -73,13 +77,18 @@ const AnimatedBacground = ({
               type="button"
               className="inline-flex text-zinc-500 items-center transition-colors duration-100 focus-visible:outline-2 data-[checked=true]:text-zinc-950"
             >
-              <span className="flex gap-2 items-center p-3 justify-center">
+              <span className="flex gap-2 items-center md:p-3 p-1 px-2 justify-center">
                 {tab.icon}
                 {tab.label}
               </span>
             </button>
           ))}
         </AnimatedBackground>
+      </div>
+      <div className="flex justify-between items-center md:hidden w-full my-3">
+        <IconLeft />
+        <p>date</p>
+        <IconRight />
       </div>
     </div>
   );
