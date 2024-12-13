@@ -18,7 +18,7 @@ const Wrapper = ({ data }: any) => {
   const [currentField, setCurrentField] = useState("events");
   return (
     <div>
-      <ul className="flex gap-2 m-5 my-0">
+      <ul className="flex gap-2 m-5 my-0 overflow-x-auto">
         {fields.map((field) => (
           <li
             className={`p-2 ${
@@ -40,15 +40,9 @@ const Wrapper = ({ data }: any) => {
         {data?.lineups?.teamA.formation && currentField == "lineup" && (
           <Lineup data={data} />
         )}
-        {currentField == "general" && (
-          <GeneralMatchInfo data={data} />
-        )}
-        {data?.stats && currentField == "stats" && (
-          <MatchStats data={data} />
-        )}
-        {data?.form && currentField == "form" && (
-          <Form data={data} />
-        )}
+        {currentField == "general" && <GeneralMatchInfo data={data} />}
+        {data?.stats && currentField == "stats" && <MatchStats data={data} />}
+        {data?.form && currentField == "form" && <Form data={data} />}
       </div>
     </div>
   );

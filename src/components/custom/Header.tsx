@@ -8,14 +8,14 @@ const Header = () => {
         <div className="flex-1">
           <Link href={"/"}>Fotmob clone</Link>
         </div>
-        <ul className="flex-1 flex justify-around ">
-          <li>
+        <ul className="flex-1 flex justify-around">
+          <li className="hidden md:block">
             <Link href={"/"}>Home</Link>
           </li>
           <li>
             <Link href={"/news"}>News</Link>
           </li>
-          <li>Contact</li>
+          <li className="hidden">Contact</li>
         </ul>
       </nav>
     </header>

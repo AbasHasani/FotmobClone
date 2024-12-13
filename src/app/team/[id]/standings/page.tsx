@@ -65,9 +65,9 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
                   <th className="text-left">Pos</th>
                   <th className="text-left">Team</th>
                   <th className="text-left">Points</th>
-                  <th className="text-left hidden md:block">Win</th>
-                  <th className="text-left hidden md:block">Draw</th>
-                  <th className="text-left hidden md:block">Loss</th>
+                  <th className="text-left hidden md:table-cell">Win</th>
+                  <th className="text-left hidden md:table-cell">Draw</th>
+                  <th className="text-left hidden md:table-cell">Loss</th>
                   <th className="text-left">+/-</th>
                   <th className="text-left">form</th>
                 </tr>
@@ -95,9 +95,9 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
                       <h2 className="ml-3">{ranking.team.name}</h2>
                     </td>
                     <td>{ranking.points}</td>
-                    <td className="hidden md:block">{ranking.win}</td>
-                    <td className="hidden md:block">{ranking.draw}</td>
-                    <td className="hidden md:block">{ranking.lose}</td>
+                    <td className="hidden md:table-cell">{ranking.win}</td>
+                    <td className="hidden md:table-cell">{ranking.draw}</td>
+                    <td className="hidden md:table-cell">{ranking.lose}</td>
                     <td>{ranking.goalsDifference}</td>
                     <td>
                       <div className="flex md:gap-1 text-xs md:text-base">

@@ -3,8 +3,11 @@ import MatchesPage from "@/components/custom/matches";
 import News from "@/components/custom/SideNews";
 import Image from "next/image";
 import CalenderProvider from "@/components/providers/calender";
+import { requestGraphql } from "@/lib/utils";
+import { GET_MATCHES } from "./live/page";
 
-export default function Home() {
+export default  function Home() {
+  
   return (
     <div className="container mx-auto">
       <div className="grid lg:grid-cols-7 m-2 gap-3">

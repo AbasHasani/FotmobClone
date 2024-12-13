@@ -26,8 +26,15 @@ const Match = ({
         {status ? (
           status === "LIVE" ? (
             <span className="live-minute">
-              {period?.minute}
-              {period?.extra}&apos;{" "}
+              {period?.type == "HALF_TIME" ? (
+                "HT"
+              ) : (
+                <span>
+                  {period?.minute +
+                    (period?.extra ? "+" + period?.extra : null)}
+                    &#39;
+                </span>
+              )}
             </span>
           ) : status === "RESULT" ? (
             "FT"
