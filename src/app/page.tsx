@@ -52,10 +52,8 @@ export default async function Home() {
   const offset = now.getTimezoneOffset();
   now = new Date(now.getTime() - offset * 60 * 1000);
   now = now.toISOString().split("T")[0];
-  console.log(now);
   
   const data = await requestGraphql(GET_MATCHES, { date: now });
-  console.log(data);
   
   return (
     <div className="container mx-auto">

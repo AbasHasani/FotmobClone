@@ -59,14 +59,15 @@ const GET_MATCHES = gql`
 `;
 
 const pollInterval = 1000 * 60;
-export default function MatchesPage({matches}:any) {
+export default function MatchesPage({ matches }: any) {
   const [filter, setFilter] = useState("all");
   const { date } = useCalender();
   const [data, setData] = useState<any>(matches || []);
   const [loading, setLoading] = useState<boolean>(false);
   const [changeLoading, setChangeLoading] = useState<boolean>(false);
-  const { toast } = useToast();
   const [error, setError] = useState<boolean>(false);
+  const [firstRender, setFirstRender] = useState<boolean>(false);
+  const { toast } = useToast();
 
   const changeFilter = (val: string) => {
     setFilter(val);
@@ -128,8 +129,6 @@ export default function MatchesPage({matches}:any) {
     setChangeLoading(false);
   };
   useEffect(() => {
-    // setChangeLoading(true);
-    // getMatches();
     const matchesUpdater = setInterval(() => {
       getMatches();
     }, pollInterval);
@@ -151,8 +150,14 @@ export default function MatchesPage({matches}:any) {
     }
   }, [error]);
   useEffect(() => {
-    getMatches();
+    if (firstRender) {
+      setChangeLoading(true)
+      getMatches();
+    }
   }, [date]);
+  useEffect(() => {
+    setFirstRender(true);
+  }, []);
   // if (loading && data?.length == 0) {
   //   return (
   //     <div className="col-span-3">
@@ -172,7 +177,6 @@ export default function MatchesPage({matches}:any) {
   // }
   return (
     <div className="flex flex-col gap-2 col-span-3">
-      {data.length == 0 ? "Yes" : "No"}
       <AnimatedBacground changeFilter={changeFilter} />
       {changeLoading && (
         <div className="col-span-3 w-full flex items-start justify-center">
