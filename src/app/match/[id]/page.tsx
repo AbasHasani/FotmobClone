@@ -457,7 +457,7 @@ const Page: FC<props> = async ({ params }) => {
         </div>
       </div>
       <Wrapper data={data} />
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
     </div>
   );
 };

@@ -1,39 +1,83 @@
 import Match from "@/components/custom/match";
 import { requestGraphql } from "@/lib/utils";
-import { gql } from "graphql-request";
+// import { gql } from "graphql-request";
 import React from "react";
+import Rounds from "./rounds";
+import { print } from "@apollo/client/utilities";
+import { gql } from "@apollo/client";
 
-const GET_LEAGUE_MATCHES = gql`
-  query GET_LEAGUE_MATCHES($id: String!) {
-    leagueMatches(id: $id) {
-      name
-      gameSetTypeId
-      active
-      matches {
-        status
-        id
-        startDate
-        score {
+const query = (showRound: boolean) => gql`
+  query ($leagueMatchesId: String!${
+    showRound ? `, $leagueRoundId: String!, $round: String!` : ""
+  }) {
+    leagueMatches(id: $leagueMatchesId) {
+    ${
+      showRound
+        ? `
+        leagueRound(id: $leagueRoundId, round: $round) {
+        name
+   active
+   matches {
+     status
+     id
+     startDate
+     score {
+       teamA
+       teamB
+     }
+     period {
+       type
+       minute
+       extra
+     }
+     teamA {
+       name
+       id
+       image {
+         url
+       }
+     }
+     teamB {
+       name
+       id
+       image {
+         url
+       }
+     }
+   }
+      }`
+        : ""
+    }
+    leagueRoundMatches {
+        name
+        gameSetTypeId
+        active
+        matches {
+          status
+          id
+          startDate
+          score {
             teamA
             teamB
-        }
-        period {
+          }
+          period {
             type
             minute
             extra
-        }
-        teamA {
-          name
-          id
-          image {
-            url
           }
-        }
-        teamB {
-          name
-          id
-          image {
-            url
+          teamA {
+            name
+            id
+            image {
+              url
+            }
+          }
+          teamB {
+            name
+            id
+            image {
+              url
+            }
           }
         }
       }
@@ -41,16 +85,36 @@ const GET_LEAGUE_MATCHES = gql`
   }
 `;
 
-const page = async ({ params }: { params: Promise<{ id: string }> }) => {
+const page = async ({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ round: string }>;
+}) => {
   const { id } = await params;
-  const data: any = await requestGraphql(GET_LEAGUE_MATCHES, { id });
+  const { round } = await searchParams;
+  const data: any = await requestGraphql(query(round ? true : false), {
+    leagueMatchesId: id,
+    leagueRoundId: id,
+    round,
+  });
+
   return (
     <div className="">
-      {data.leagueMatches.map((leagueRound: any) =>
-        leagueRound.matches.map((match: any) => (
-          <Match key={match.id} {...match} />
-        ))
-      )}
+      <Rounds data={data} id={id} round={round} />
+      {round
+        ? data.leagueMatches.leagueRound.matches.map((match: any) => (
+            <Match key={match.id} {...match} />
+          ))
+        : data.leagueMatches.leagueRoundMatches.map(
+            (leagueRound: any) =>
+              leagueRound.active &&
+              leagueRound.matches.map((match: any) => (
+                <Match key={match.id} {...match} />
+              ))
+          )}
+      <pre>{JSON.stringify(data, null, 2)}</pre>
     </div>
   );
 };

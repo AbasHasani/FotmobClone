@@ -14,6 +14,8 @@ import { useGetLiveScoresQuery } from "@/generated/graphql";
 import { Loader2 } from "lucide-react";
 import AnimatedBacground from "./motion-ui/AnimatedBacground";
 import Link from "next/link";
+import { useToast } from "@/hooks/use-toast";
+import { ToastAction } from "../ui/toast";
 
 const GET_MATCHES = gql`
   query GetLiveScores($date: String!) {
@@ -64,7 +66,7 @@ export default function MatchesPage() {
   const [data, setData] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [changeLoading, setChangeLoading] = useState<boolean>(false);
-
+  const { toast } = useToast();
   const [error, setError] = useState<boolean>(false);
 
   const changeFilter = (val: string) => {
@@ -134,6 +136,20 @@ export default function MatchesPage() {
     }, pollInterval);
     return () => clearInterval(matchesUpdater);
   }, [date]);
+  useEffect(() => {
+    if (error && date.length != 0) {
+      toast({
+        title: "Error",
+        description: "You seem to have lost connection",
+        variant: "destructive",
+        action: (
+          <ToastAction onClick={() => getMatches()} altText="Try again">
+            Try again
+          </ToastAction>
+        ),
+      });
+    }
+  }, [error]);
   // useEffect(() => {
   //   getMatches();
   // }, [date]);

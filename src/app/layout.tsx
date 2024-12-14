@@ -4,7 +4,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Providers } from "../components/providers/apollo-client";
 import Header from "@/components/custom/Header";
-
+import { Toaster } from "@/components/ui/toaster"
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -35,6 +35,7 @@ export default function RootLayout({
       >
         <Header />
         <Providers>{children}</Providers>
+        <Toaster />
       </body>
     </html>
   );
