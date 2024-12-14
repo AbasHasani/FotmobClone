@@ -59,10 +59,10 @@ const GET_MATCHES = gql`
 `;
 
 const pollInterval = 1000 * 60;
-export default function MatchesPage() {
+export default function MatchesPage({matches}:any) {
   const [filter, setFilter] = useState("all");
   const { date } = useCalender();
-  const [data, setData] = useState<any>([]);
+  const [data, setData] = useState<any>(matches || []);
   const [loading, setLoading] = useState<boolean>(false);
   const [changeLoading, setChangeLoading] = useState<boolean>(false);
   const { toast } = useToast();
@@ -128,13 +128,14 @@ export default function MatchesPage() {
     setChangeLoading(false);
   };
   useEffect(() => {
-    setChangeLoading(true);
-    getMatches();
+    // setChangeLoading(true);
+    // getMatches();
     const matchesUpdater = setInterval(() => {
       getMatches();
     }, pollInterval);
     return () => clearInterval(matchesUpdater);
   }, [date]);
+
   useEffect(() => {
     if (error && date.length != 0) {
       toast({
@@ -149,9 +150,9 @@ export default function MatchesPage() {
       });
     }
   }, [error]);
-  // useEffect(() => {
-  //   getMatches();
-  // }, [date]);
+  useEffect(() => {
+    getMatches();
+  }, [date]);
   // if (loading && data?.length == 0) {
   //   return (
   //     <div className="col-span-3">

@@ -43,7 +43,7 @@ const Match = ({
           )
         ) : null}
       </div>
-      <div className="flex flex-row-reverse md:flex-row justify-end gap-3 items-center overflow-auto">
+      <div className="flex flex-row-reverse md:flex-row justify-end gap-3 items-center">
         <p className="text-sm lg:text-base text-ellipsis whitespace-nowrap overflow-hidden">
           {teamA?.name}
         </p>
@@ -52,7 +52,7 @@ const Match = ({
             (score?.teamA || 0) > (score?.teamB || 0) ? "text-green-400" : ""
           }`}
         >
-          {score?.teamA}
+          {truncateAfterSpace(teamA?.name || "", 18)}
         </p>
         <Image
           src={
@@ -83,7 +83,7 @@ const Match = ({
           {score?.teamB}
         </p>
       </div>
-      <div className="flex justify-start gap-3 items-center overflow-auto">
+      <div className="flex justify-start gap-3 items-center">
         <Image
           src={
             isImageAbsolute
@@ -103,7 +103,7 @@ const Match = ({
           {score?.teamB}
         </p>
         <p className="text-sm lg:text-base text-ellipsis whitespace-nowrap overflow-hidden">
-          {teamB?.name}
+        {truncateAfterSpace(teamB?.name || "", 18)}
         </p>
       </div>
     </Link>
