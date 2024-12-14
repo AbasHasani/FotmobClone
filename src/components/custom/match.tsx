@@ -32,7 +32,7 @@ const Match = ({
                 <span>
                   {period?.minute +
                     (period?.extra ? "+" + period?.extra : null)}
-                    &#39;
+                  &#39;
                 </span>
               )}
             </span>
@@ -45,14 +45,14 @@ const Match = ({
       </div>
       <div className="flex flex-row-reverse md:flex-row justify-end gap-3 items-center">
         <p className="text-sm lg:text-base text-ellipsis whitespace-nowrap overflow-hidden">
-          {teamA?.name}
+          {truncateAfterSpace(teamA?.name || "", 18)}
         </p>
         <p
           className={`block md:hidden ${
             (score?.teamA || 0) > (score?.teamB || 0) ? "text-green-400" : ""
           }`}
         >
-          {truncateAfterSpace(teamA?.name || "", 18)}
+          {score?.teamA}
         </p>
         <Image
           src={
@@ -103,7 +103,7 @@ const Match = ({
           {score?.teamB}
         </p>
         <p className="text-sm lg:text-base text-ellipsis whitespace-nowrap overflow-hidden">
-        {truncateAfterSpace(teamB?.name || "", 18)}
+          {truncateAfterSpace(teamB?.name || "", 18)}
         </p>
       </div>
     </Link>
