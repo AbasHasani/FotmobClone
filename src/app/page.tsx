@@ -1,10 +1,7 @@
 import CustomCalendar from "@/components/custom/calendar";
 import MatchesPage from "@/components/custom/matches";
 import News from "@/components/custom/SideNews";
-import Image from "next/image";
 import CalenderProvider from "@/components/providers/calender";
-import { requestGraphql } from "@/lib/utils";
-import { GET_MATCHES } from "./live/page";
 
 export default  function Home() {
   
