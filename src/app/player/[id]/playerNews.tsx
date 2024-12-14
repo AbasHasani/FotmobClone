@@ -29,7 +29,7 @@ const GET_PLAYER_NEWS = gql`
 const PlayerNews = async ({ id }: { id: string }) => {
   const variables = { id };
   const data = await fetchGraphql(GET_PLAYER_NEWS, variables);
-  if (!data || !data?.data?.playerNews?.cards) return "Error";
+  if (!data) return "Error";
   return <NewsSection cards={data.data.playerNews.cards} />;
 };
 

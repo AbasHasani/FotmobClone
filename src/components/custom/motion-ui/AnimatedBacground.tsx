@@ -60,9 +60,9 @@ const AnimatedBacground = ({
     console.log(newDate);
   };
   return (
-    <div className="flex flex-col items-center my-3">
-      <div className="flex items-center justify-between w-full px-6 md:px-0 md:flex-col">
-        <h1 className={`md:font-bold text-3xl ${AbrilFatface.className}`}>
+    <div className="flex flex-col items-center md:my-3">
+      <div className="flex items-center justify-between w-full px-2 md:px-0 md:flex-col">
+        <h1 className={`md:font-bold md:text-3xl ${AbrilFatface.className}`}>
           Matches
         </h1>
         <div className="mt-6 mb-2 rounded-sm bg-slate-950 p-3">

@@ -55,7 +55,7 @@ const Layout = async ({
             </h1>
           </div>
           <div className="h-[1px] bg-gradient-to-r from-white to-green-400 w-full" />
-          <ul className="mt-3">
+          <ul className="mt-3 overflow-auto">
             <li>
               <Link href={"/league/" + id} className="mx-3">
                 News

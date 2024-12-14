@@ -423,12 +423,12 @@ const Page: FC<props> = async ({ params }) => {
           {data.scorers.teamA.map((player: any) => (
             <div
               key={player.player.name}
-              className="flex bg-green-950/20 p-3 border-r border-green-900/40 items-center"
+              className="flex md:bg-green-950/20 md:p-3 border-r border-green-900/40 items-center"
             >
               {player?.events.map((event: any) => (
                 <p
                   key={event.period.minute + event.type}
-                  className="w-8 h-8 bg-green-900/40 rounded-full grid place-items-center mr-2"
+                  className="md:w-8 md:h-8 bg-green-900/40 rounded-full grid place-items-center mr-2"
                 >
                   {event.period.minute}&apos;
                 </p>

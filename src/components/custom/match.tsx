@@ -17,7 +17,7 @@ const Match = ({
   return (
     <Link
       href={`/match/${id}`}
-      className="items-start odd:bg-slate-800/20 even:bg-slate-900/20 hover:bg-green-950/30  rounded-md flex md:grid md:items-center flex-col transition-all text-green-100 relative pl-14 md:p-4 gap-2 md:gap-0 py-2"
+      className="overflow-auto items-start odd:bg-slate-800/20 even:bg-slate-900/20 hover:bg-green-950/30  rounded-md flex md:grid md:items-center flex-col transition-all text-green-100 relative pl-14 md:p-4 gap-2 md:gap-0 py-2"
       style={{
         gridTemplateColumns: "1fr auto 1fr",
       }}
@@ -43,7 +43,7 @@ const Match = ({
           )
         ) : null}
       </div>
-      <div className="flex flex-row-reverse md:flex-row justify-end gap-3 items-center">
+      <div className="flex flex-row-reverse md:flex-row justify-end gap-3 items-center overflow-auto">
         <p className="text-sm lg:text-base text-ellipsis whitespace-nowrap overflow-hidden">
           {teamA?.name}
         </p>
@@ -83,7 +83,7 @@ const Match = ({
           {score?.teamB}
         </p>
       </div>
-      <div className="flex justify-start gap-3 items-center">
+      <div className="flex justify-start gap-3 items-center overflow-auto">
         <Image
           src={
             isImageAbsolute
