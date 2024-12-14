@@ -46,7 +46,7 @@ const GET_MATCHES = gql`
 
 
 const page = async () => {
-    const data = await requestGraphql(GET_MATCHES);
+    const data = await requestGraphql(GET_MATCHES, {date: "2024-12-14"});
   return (
     <div>
         <pre>{JSON.stringify(data, null, 2)}</pre>
