@@ -1,5 +1,5 @@
 import NewsSection from "@/components/custom/NewsSection";
-import { fetchGraphql } from "@/lib/utils";
+import { requestGraphql } from "@/lib/utils";
 import { gql } from "@apollo/client";
 import React from "react";
 
@@ -28,9 +28,14 @@ const GET_PLAYER_NEWS = gql`
 
 const PlayerNews = async ({ id }: { id: string }) => {
   const variables = { id };
-  const data = await fetchGraphql(GET_PLAYER_NEWS, variables);
+  const data: any = await requestGraphql(GET_PLAYER_NEWS, variables);
   if (!data) return "Error";
-  return <NewsSection cards={data.data.playerNews.cards} />;
+  // return (
+  //   <div>
+  //     <pre>{JSON.stringify(data, null, 2)}</pre>
+  //   </div>
+  // );
+  return <NewsSection cards={data.playerNews.cards} />;
 };
 
 export default PlayerNews;

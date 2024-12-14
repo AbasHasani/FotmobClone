@@ -1,4 +1,4 @@
-import { baseGoalImageUrl, fetchGraphql } from "@/lib/utils";
+import { baseGoalImageUrl, fetchGraphql, requestGraphql } from "@/lib/utils";
 import { gql } from "@apollo/client";
 import Image from "next/image";
 import Link from "next/link";
@@ -79,15 +79,15 @@ const Page = async ({
 }) => {
   const { id } = await params;
   const { tab } = await searchParams;
-  const data = await fetchGraphql(GET_PLAYER, { id });
+  const data:any = await requestGraphql(GET_PLAYER, { id });
   if (!data) return <p>No Date!.. soooooryyyy</p>;
-  if (!data.data.player) return <p>No Date!.. soooooryyyy</p>;
+  // if (!data.player) return <p>No Date!.. soooooryyyy</p>;
   return (
     <div className="container">
       <div className=" my-5">
         <div className="flex items-center gap-6 pb-3">
           <Image
-            src={baseGoalImageUrl + data.data.player.image.url}
+            src={baseGoalImageUrl + data.player.image.url}
             width={100}
             height={100}
             alt=""
@@ -96,7 +96,7 @@ const Page = async ({
           />
           <div>
             <h1 className={`text-4xl ${AbrilFatface.className}`}>
-              {data.data.player.name}
+              {data.player.name}
             </h1>
           </div>
         </div>
@@ -112,8 +112,8 @@ const Page = async ({
           </li>
         </ul>
       </div>
-      {tab ? <PlayerNews id={id} /> : <PlayerStats data={data.data.player} />}
       {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
+      {tab ? <PlayerNews id={id} /> : <PlayerStats data={data.player} />}
     </div>
   );
 };
