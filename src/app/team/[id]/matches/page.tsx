@@ -3,7 +3,7 @@ import { fetchGraphql } from "@/lib/utils";
 import { gql } from "@apollo/client";
 import React from "react";
 import TeamMatches from "./TeamMatches";
-
+export const revalidate = 8 * 60 * 60;
 const GET_TEAM_MATCHES = gql`
   query Team($id: String!) {
     teamMatches(id: $id) {

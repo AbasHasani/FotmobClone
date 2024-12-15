@@ -337,6 +337,9 @@ const GET_MATCH = gql`
   }
 `;
 
+
+export const dynamic = "force-dynamic";
+
 const Page: FC<props> = async ({ params }) => {
   const { id } = await params;
   const query = print(GET_MATCH);

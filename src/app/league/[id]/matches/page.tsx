@@ -5,7 +5,7 @@ import React from "react";
 import Rounds from "./rounds";
 import { print } from "@apollo/client/utilities";
 import { gql } from "@apollo/client";
-
+export const revalidate = 8 * 60 * 60;
 const query = (showRound: boolean) => gql`
   query ($leagueMatchesId: String!${
     showRound ? `, $leagueRoundId: String!, $round: String!` : ""

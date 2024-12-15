@@ -35,16 +35,28 @@ const Event = ({ event }: { event: any }) => {
 
   return (
     <div
-      className={`inline-flex gap-3 items-center ${
+      className={`inline-flex items-center ${
         event.side == "TEAM_A" ? "justify-end" : ""
       }`}
     >
-      <span>{Icon}</span>
       <div>
-        <p className="font-bold text-lg">{player}</p>
-        <p className="font-light text-sm text-green-400/40">
-          {eventContribute}
-        </p>
+        <div
+          className={`flex items-center gap-3 ${
+            event.side == "TEAM_A" ? "flex-row-reverse" : ""
+          }`}
+        >
+          <span>{Icon}</span>
+          <div
+            className={`${
+              event.side == "TEAM_A" ? "flex flex-col items-end" : ""
+            }`}
+          >
+            <p className="font-bold text-lg">{player}</p>
+            <p className="font-light text-sm text-green-400/40">
+              {eventContribute}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -10,6 +10,10 @@ const AbrilFatface = Abril_Fatface({
   weight: "400",
   variable: "--font-abril",
 });
+
+export const revalidate = 8 * 60 * 60; // Revalidate every 8 hours (in seconds)
+
+
 const GET_NEWS = gql`
   query GetMatch {
     news {

@@ -70,6 +70,8 @@ const GET_PLAYER = gql`
   }
 `;
 
+export const revalidate = 24 * 60 * 60;
+
 const Page = async ({
   params,
   searchParams,
