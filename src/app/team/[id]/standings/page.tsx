@@ -8,7 +8,7 @@ const AbrilFatface = Abril_Fatface({
   weight: "400",
   variable: "--font-abril",
 });
-export const revalidate = 8 * 60 * 60;
+export const revalidate = 28800;
 const GET_TEAM_STANDIGS = gql`
   query Team($id: String!) {
     teamStandings(id: $id) {

@@ -27,7 +27,7 @@ const GET_TEAM_NEWS = gql`
     }
   }
 `;
-export const revalidate = 8 * 60 * 60;
+export const revalidate = 28800;
 interface props {
   params: Promise<{
     id: string;

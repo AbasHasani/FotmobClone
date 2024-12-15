@@ -10,7 +10,7 @@ const AbrilFatface = Abril_Fatface({
 });
 import { HandHelping, LoaderPinwheel, PersonStanding } from "lucide-react";
 import { Abril_Fatface } from "next/font/google";
-export const revalidate = 8 * 60 * 60;
+export const revalidate = 80000000;
 const GET_TEAM_SQUAD = gql`
   query Team($id: String!) {
     teamSquad(id: $id) {

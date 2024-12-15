@@ -12,8 +12,6 @@ const AbrilFatface = Abril_Fatface({
   variable: "--font-abril",
 });
 
-export const revalidate = 24 * 60 * 60;
-
 const GET_TEAM = gql`
   query Team($id: String!) {
     team(id: $id) {

@@ -11,7 +11,7 @@ const AbrilFatface = Abril_Fatface({
   variable: "--font-abril",
 });
 
-export const revalidate = 8 * 60 * 60; // Revalidate every 8 hours (in seconds)
+export const revalidate = 28800; // Revalidate every 8 hours (in seconds)
 
 
 const GET_NEWS = gql`

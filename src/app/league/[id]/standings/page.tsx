@@ -2,7 +2,7 @@ import { baseGoalImageUrl, requestGraphql } from "@/lib/utils";
 import { gql } from "graphql-request";
 import Image from "next/image";
 import React from "react";
-export const revalidate = 8 * 60 * 60;
+export const revalidate = 28800;
 const GETLEAGUE_TABLE = gql`
   query GETLEAGUE_TABLE($id: String!) {
     leagueStandings(id: $id) {

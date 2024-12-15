@@ -12,8 +12,6 @@ const AbrilFatface = Abril_Fatface({
 });
 
 
-export const dynamic = "force-dynamic";
-
 const GET_LEAGUE = gql`
   query getLeague($id: String!) {
     leagueCompetition(id: $id) {
