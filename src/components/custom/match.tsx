@@ -1,5 +1,5 @@
 "use client";
-import { convertUTCToLocalTime, truncateAfterSpace } from "@/lib/utils";
+import { convertUTCToLocalTime, convertToLocalTime, truncateAfterSpace } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -39,7 +39,7 @@ const Match = ({
           ) : status === "RESULT" ? (
             "FT"
           ) : (
-            convertUTCToLocalTime(startDate).toString()
+            convertToLocalTime(startDate)
           )
         ) : null}
       </div>

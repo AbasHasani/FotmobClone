@@ -17,6 +17,21 @@ export const convertUTCToLocalTime = (utcTime: any) => {
   const minute = localDate.getMinutes() == 0 ? "00" : localDate.getMinutes();
   return `${hour}:${minute}`;
 };
+export function convertToLocalTime(isoTimestamp: string): string {
+  // Create a Date object from the ISO timestamp
+  const date = new Date(isoTimestamp);
+  
+  // Get hours and minutes
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  
+  // Pad with leading zeros if needed
+  const formattedHours = hours.toString().padStart(2, '0');
+  const formattedMinutes = minutes.toString().padStart(2, '0');
+  
+  // Return in HH:MM format
+  return `${formattedHours}:${minutes.toString().padStart(2, '0')}`;
+}
 
 export const truncateAfterSpace = (str: string, limit = 100) => {
   if (str.length <= limit) return str;

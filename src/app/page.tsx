@@ -47,9 +47,6 @@ const GET_MATCHES = gql`
   }
 `;
 
-export const dynamic = "force-dynamic";
-
-
 export default async function Home() {
   // let now:any = new Date();
   // const offset = now.getTimezoneOffset();
