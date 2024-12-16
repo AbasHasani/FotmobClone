@@ -15,8 +15,10 @@ import AnimatedBacground from "./motion-ui/AnimatedBacground";
 import Link from "next/link";
 import { useToast } from "@/hooks/use-toast";
 import { ToastAction } from "../ui/toast";
+import request from "graphql-request";
+import useSWR from "swr";
 
-const GET_MATCHES = gql`
+const GET_MATCHES = `
   query GetLiveScores($date: String!) {
     liveScore(date: $date) {
       competition {
@@ -57,128 +59,37 @@ const GET_MATCHES = gql`
     }
   }
 `;
+const fetcher = ([query, vars]: any) =>
+  request({
+    url: "https://fotmob-uvwm.onrender.com/graphql",
+    document: query,
+    variables: vars,
+  });
 
-const pollInterval = 1000 * 60;
+const refreshInterval = 1000 * 60;
 export default function MatchesPage({ matches }: any) {
-  const [filter, setFilter] = useState("all");
   const { date } = useCalender();
-  const [data, setData] = useState<any>(matches || []);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [changeLoading, setChangeLoading] = useState<boolean>(false);
-  const [error, setError] = useState<boolean>(false);
-  const [firstRender, setFirstRender] = useState<boolean>(false);
-  const { toast } = useToast();
-
-  const changeFilter = (val: string) => {
-    setFilter(val);
-  };
-  // const { loading, data, error, refetch } = useGetLiveScoresQuery({
-  //   variables: { date },
-  //   pollInterval,
-  // });
-  // if (loading && !data) {
-  //   return (
-  //     <>
-  //     {/* Loading */}
-  //       <div className="col-span-3 flex justify-center pt-6">
-  //         <Loader2 size={50} className="animate-spin" />
-  //       </div>
-  //     </>
-  //   );
-  // }
-  // if (error) {
-  //   return (
-  //     <div className="col-span-3 flex flex-col pt-6">
-  //       <span>Error: {error.message} </span>
-  //       <span>Type of Error: {typeof error} </span>
-  //       <button
-  //         className="bg-fuchsia-700 rounded-md p-2"
-  //         onClick={() => refetch()}
-  //       >
-  //         Refetch
-  //       </button>
-  //     </div>
-  //   );
-  // }
-  // if (!data) {
-  //   return (
-  //     <div className="col-span-3 flex justify-center pt-6">
-  //       <Loader2 size={50} className="animate-spin" />
-  //     </div>
-  //   );
-  // }
-  // if (!data.liveScore) {
-  //   return (
-  //     <div className="col-span-3 flex justify-center pt-6">
-  //       <Loader2 size={50} className="animate-spin" />
-  //     </div>
-  //   );
-  // }
-  const getMatches = async () => {
-    setError(false);
-    setLoading(true);
-    try {
-      const matches = await requestGraphql(GET_MATCHES, { date });
-      setData(matches);
-      setLoading(false);
-      setError(false);
-    } catch (error) {
-      setLoading(false);
-      setError(true);
-    }
-    setChangeLoading(false);
-  };
-  useEffect(() => {
-    const matchesUpdater = setInterval(() => {
-      getMatches();
-    }, pollInterval);
-    return () => clearInterval(matchesUpdater);
-  }, [date]);
-
-  useEffect(() => {
-    if (error && date.length != 0) {
-      toast({
-        title: "Error",
-        description: "You seem to have lost connection",
-        variant: "destructive",
-        action: (
-          <ToastAction onClick={() => getMatches()} altText="Try again">
-            Try again
-          </ToastAction>
-        ),
-      });
-    }
-  }, [error]);
-  useEffect(() => {
-    if (firstRender) {
-      setChangeLoading(true)
-      getMatches();
-    }
-  }, [date]);
-  useEffect(() => {
-    setFirstRender(true);
-  }, []);
-  // if (loading && data?.length == 0) {
-  //   return (
-  //     <div className="col-span-3">
-  //       Loading... <Loader2 className="animate-spin" />
-  //     </div>
-  //   );
-  // }
-  // if (error && data?.length > 0) {
-  //   return (
-  //     <div className="col-span-3">
-  //       <p>Error</p>
-  //       <button className="p-3 bg-cyan-800 text-white" onClick={getMatches}>
-  //         Refetch
-  //       </button>
-  //     </div>
-  //   );
-  // }
+  const {
+    data,
+    error,
+    isLoading: loading,
+  } = useSWR<any>([GET_MATCHES, { date }], fetcher, {
+    refreshInterval,
+  });
+  const [filter, setFilter] = useState("all");
+  // return <pre>{JSON.stringify(data, null, 2)}</pre>
+  // if (loading) return null;
+  if (error && data?.length == 0) {
+    return (
+      <div className="col-span-3">
+        <p>Error</p>
+      </div>
+    );
+  }
   return (
     <div className="flex flex-col gap-2 col-span-3">
-      <AnimatedBacground changeFilter={changeFilter} />
-      {changeLoading && (
+      <AnimatedBacground changeFilter={(val) => setFilter(val)} />
+      {loading && (
         <div className="col-span-3 w-full flex items-start justify-center">
           <div className="flex items-center gap-3 p-3 border rounded-sm  justify-center">
             <p className="text-green-50">Loading...</p>
@@ -186,23 +97,7 @@ export default function MatchesPage({ matches }: any) {
           </div>
         </div>
       )}
-      {loading && data.length == 0 && !changeLoading && (
-        <div className="col-span-3 w-full flex items-start justify-center">
-          <div className="flex items-center gap-3 p-3 border rounded-sm  justify-center">
-            <p className="text-green-50">Loading...</p>
-            <Loader2 className="animate-spin text-green-800" />
-          </div>
-        </div>
-      )}
-      {error && data.length == 0 && (
-        <div className="col-span-3">
-          <p>Error</p>
-          <button className="p-3 bg-cyan-800 text-white" onClick={getMatches}>
-            Refetch
-          </button>
-        </div>
-      )}
-      {!changeLoading &&
+      {!loading &&
         data.liveScore?.map((league: any, i: number) =>
           league?.matches?.filter((m: any) =>
             filter == "all" ? true : m.status === filter
