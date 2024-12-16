@@ -24,7 +24,7 @@ const GET_LEAGUE_NEWS = gql`
     }
   }
 `;
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
   const data: any = await requestGraphql(GET_LEAGUE_NEWS, { id });

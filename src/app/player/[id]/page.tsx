@@ -70,7 +70,7 @@ const GET_PLAYER = gql`
   }
 `;
 
-export const revalidate = 86400;
+// export const revalidate = 86400;
 
 const Page = async ({
   params,

@@ -24,7 +24,7 @@ const GET_NEWS = gql`
     }
   }
 `;
-export const revalidate = 28800;
+export const dynamic = "force-dynamic";
 
 const News = async () => {
   const data = await fetchGraphql(GET_NEWS);

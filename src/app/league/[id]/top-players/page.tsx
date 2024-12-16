@@ -1,7 +1,7 @@
 import { requestGraphql } from "@/lib/utils";
 import { gql } from "graphql-request";
 import React from "react";
-export const revalidate = 28800;
+// export const revalidate = 28800;
 const GET_LEAGUE_TOP_PLAYERS = gql`
   query getLeagueTopPlayers($id: String!) {
     leagueTopPlayers(id: $id) {
